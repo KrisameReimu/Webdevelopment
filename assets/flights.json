@@ -1,0 +1,24 @@
+[
+    {
+      "departureAirport": "JFK",
+      "destinationAirport": "LAX",
+      "departureTime": "2023-10-30 08:00",
+      "duration": 5,
+      "ticketPrice": 200
+    },
+    {
+      "departureAirport": "LAX",
+      "destinationAirport": "SFO",
+      "departureTime": "2023-10-30 13:00",
+      "duration": 2,
+      "ticketPrice": 100
+    },
+    {
+      "departureAirport": "LHR",
+      "destinationAirport": "CDG",
+      "departureTime": "2023-10-31 09:30",
+      "duration": 1.5,
+      "ticketPrice": 150
+    }
+  ]
+  

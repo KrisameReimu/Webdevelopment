@@ -12,14 +12,12 @@ Chen Chen Xu HanZhuo-->
 <head>
     <title>Flight Ticket Selling System - Profile</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
-    <script src="scripts/jquery-3.7.1.min.js"></script>
-
-    <!-- Include external JavaScript file -->
-    <script src="scripts/profile.js"></script>
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+<script src="scripts/jquery-3.7.1.min.js"></script>
+<script src="register.js"></script>
 </head>
 
 <body>
@@ -43,49 +41,76 @@ Chen Chen Xu HanZhuo-->
                         <a class="nav-link" href="bookings.html">Ticket Bookings</a>
                         <a class="nav-link" href="payment.html">Payment</a>
                         <a class="nav-link" href="register.html">Sign Up/Sign In</a>
-                        <a class="nav-link" href="profile.html">profile</a>
-
                     </div>
                 </div>
+            </div>
     </nav>
     <div class="container">
-        <h2 class="text-center mt-4">User Profile</h2>
-        <form id="registrationForm">
-            <div class="form-group">
-                <label for="userId">User ID:</label>
-                <input type="text" class="form-control" id="userId" required>
+        <h2 class="text-center mt-4">Sign up for our latest Information!</h2>
+        <ul class="nav nav-tabs" id="tabMenu">
+            <li class="nav-item">
+                <a class="nav-link active" id="registerTab" data-bs-toggle="tab" href="#registerForm">Register</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="loginTab" data-bs-toggle="tab" href="#loginForm">Sign In</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="registerForm">
+                <form id="registrationForm">
+                    <!-- Register form content -->
+                    <!-- User ID, Password, Confirm Password, Nickname, Email, Gender, Birthdate -->
+                    <div class="form-group">
+                        <label for="userId">User ID:</label>
+                        <input type="text" class="form-control" id="userId" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" class="form-control" id="password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password:</label>
+                        <input type="password" class="form-control" id="confirmPassword" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="nickname">Nickname:</label>
+                        <input type="text" class="form-control" id="nickname" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" class="form-control" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="gender">Gender:</label>
+                        <select class="form-control" id="gender" required>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="birthdate">Birthdate:</label>
+                        <input type="date" class="form-control" id="birthdate" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </form>
             </div>
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" class="form-control" id="password" required>
-            </div>
-            <div class="form-group">
-                <label for="confirmPassword">Confirm Password:</label>
-                <input type="password" class="form-control" id="confirmPassword" required>
-            </div>
-            <div class="form-group">
-                <label for="nickname">Nickname:</label>
-                <input type="text" class="form-control" id="nickname" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" class="form-control" id="email" required>
-            </div>
-            <div class="form-group">
-                <label for="gender">Gender:</label>
-                <select class="form-control" id="gender" required>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="other">Other</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="birthdate">Birthdate:</label>
-                <input type="date" class="form-control" id="birthdate" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Register</button>
-        </form>
-    </div>
+            <div class="tab-pane fade" id="loginForm">
+                <form id="loginForm">
+                   <!-- Login form content -->
+                   <!-- User ID, Password -->
+                   <div class="form-group">
+                      <label for="loginUserId">User ID:</label>
+                      <input type="text" class="form-control" id="loginUserId" required>
+                   </div>
+                   <div class="form-group">
+                      <label for="loginPassword">Password:</label>
+                      <input type="password" class="form-control" id="loginPassword" required>
+                   </div>
+                   <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+             </div>
+             
 
     <footer class="bg-dark text-white text-center py-3 mt-5 fixed-bottom">
         &copy; EIE4432 GP PROJECT:Flight Ticket Selling System

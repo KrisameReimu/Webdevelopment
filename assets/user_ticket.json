@@ -1,0 +1,8 @@
+
+{
+    "departureAirport": "JFK",
+    "destinationAirport": "LAX",
+    "departureTime": "2023-10-30 08:00",
+    "duration": 5,
+    "ticketPrice": 200
+  }

@@ -4,7 +4,7 @@
 Chen Chen Xu HanZhuo-->
 
 <!--Student ID:-->
-<!--21106181D 2xxxxxxxD-->
+<!--21106181D 21103197D-->
 
 <!DOCTYPE html>
 <html>
@@ -46,46 +46,55 @@ Chen Chen Xu HanZhuo-->
                 </div>
             </div>
     </nav>
-    <!--Event Dashboard -->
+    <!-- Flight Ticket Dashboard -->
     <div class="container">
-        <h2 class="text-center mt-4">Create New Event</h2>
-        <form id="createEventForm">
+        <img src="assets/flight_ticket.png" class="rounded mx-auto d-block w-25 h-25" alt="Flight Ticket Poster">
+        <!--Only visible to admin-->
+        <form id="createFlightForm">
+            <h2 class="text-center mt-4">Create New Flight</h2>
             <div class="form-group">
-                <label for="eventDate">Date and Time:</label>
-                <input type="datetime-local" class="form-control" id="eventDate" required>
+                <label for="flightFrom">Departure Airport:</label>
+                <input type="text" class="form-control" id="flightFrom" required>
             </div>
             <div class="form-group">
-                <label for="eventTitle">Title:</label>
-                <input type="text" class="form-control" id="eventTitle" required>
+                <label for="flightTo">Destination Airport:</label>
+                <input type="text" class="form-control" id="flightTo" required>
             </div>
             <div class="form-group">
-                <label for="eventVenue">Venue:</label>
-                <input type="text" class="form-control" id="eventVenue" required>
+                <label for="departureTime">Departure Time:</label>
+                <input type="datetime-local" class="form-control" id="departureTime" required>
             </div>
             <div class="form-group">
-                <label for="eventDescription">Description:</label>
-                <textarea class="form-control" id="eventDescription" rows="3" required></textarea>
+                <label for="estimatedDuration">Estimated Duration (hours):</label>
+                <input type="number" class="form-control" id="estimatedDuration" required>
             </div>
-            <button type="submit" class="btn btn-primary">Create Event</button>
+            <div class="form-group">
+                <label for="ticketPrice">Ticket Price:</label>
+                <input type="number" class="form-control" id="ticketPrice" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Create Flight</button>
         </form>
+        <!--For customers check events dashboard-->
         <br>
-        <h2>List of Events</h2>
-        <input type="text" id="searchEvent" class="form-control" placeholder="Search events">
+        <h2>List of Flights</h2>
+        <input type="text" id="searchFlight" class="form-control" placeholder="Search flights">
         <br>
-        <table id="eventTable" class="table table-striped">
+        <table id="flightTable" class="table table-striped">
             <thead>
                 <tr>
-                    <th>Date/Time</th>
-                    <th>Title</th>
-                    <th>Venue</th>
-                    <th>Description</th>
+                    <th>Departure Airport</th>
+                    <th>Destination Airport</th>
+                    <th>Departure Time</th>
+                    <th>Estimated Duration (hours)</th>
+                    <th>Ticket Price</th>
                 </tr>
             </thead>
             <tbody>
-                <!-- Event rows will be dynamically added here -->
+                <!-- Flight rows will be dynamically added here -->
             </tbody>
         </table>
     </div>
+
 
     <footer class="bg-dark text-white text-center py-3 mt-5 fixed-bottom">
         &copy; EIE4432 GP PROJECT:Flight Ticket Selling System
