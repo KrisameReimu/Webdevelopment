@@ -1,0 +1,274 @@
+<!--Group members' infomation:-->
+
+<!--Student Name:
+Chen Chen Xu HanZhuo-->
+
+<!--Student ID:-->
+<!--21106181D 21103197D-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Flight Ticket Selling System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="scripts/jquery-3.7.1.min.js"></script>
+    
+    <!-- Include external JavaScript file -->
+    <script src="bookings.js"></script>
+    <style>
+        .selected {
+            fill: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="p-3 m-auto bg-dark text-white text-center">
+        <h1>Flight Ticket Selling System</h1>
+    </header>
+    <nav class="navbar justify-content-center navbar-expand-lg navbar-light bg-primary-subtle ">
+        <div class="container">
+            <!-- button for small screen -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- collapse navigation bar -->
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <div class="navbar-nav">
+                    <a class="nav-link navbar-brand active fw-bold link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+                        href="index.html">Home</a>
+                    <a class="nav-link" href="bookings.html">Ticket Bookings</a>
+                    <a class="nav-link" href="payment.html">Payment</a>
+                    <a class="nav-link" href="register.html">Sign Up/Sign In</a>
+                    <a class="nav-link" href="profile.html">profile</a>
+                </div>
+            </div>
+    </nav>
+    <div class = "container-fluid">
+        <svg width = "900" height = "500">
+            <g>
+                <circle  cx="100" cy = "50" r ="30"  class = "table" id = "table1"   id="seatOne">
+                
+                </circle>
+                
+                <circle  cx="200" cy = "50" r ="30"  class = "table"  >
+                    
+                </circle>
+                
+                <circle  cx="300" cy = "50" r ="30"  class = "table"  >
+                    
+                </circle>
+                
+                <circle  cx="400" cy = "50" r ="30"  class = "table" >
+                    
+                </circle>
+                <circle  cx="500" cy = "50" r ="30"  class = "table" fill = "green" >
+                
+                </circle>
+                
+                <circle  cx="600" cy = "50" r ="30"  class = "table" fill = "green">
+                    
+                </circle>
+                
+                <circle  cx="700" cy = "50" r ="30"  class = "table"  >
+                    
+                </circle>
+                
+                <circle  cx="800" cy = "50" r ="30"  class = "table" >
+                    
+                </circle>
+                <text class="price" x="100" y="50" text-anchor="middle" fill = "white">$998</text>
+                <text class="price" x="200" y="50" text-anchor="middle" fill = "white">$998</text>
+                <text class="price" x="300" y="50" text-anchor="middle" fill = "white">$998</text>
+                <text class="price" x="400" y="50" text-anchor="middle" fill = "white">$998</text>
+                <text class="price" x="500" y="50" text-anchor="middle" fill = "white">$998</text>
+                <text class="price" x="600" y="50" text-anchor="middle" fill = "white">$998</text>
+                <text class="price" x="700" y="50" text-anchor="middle" fill = "white">$998</text>
+                <text class="price" x="800" y="50" text-anchor="middle" fill = "white">$998</text>
+            </g>
+            <g>
+                <circle  cx="100" cy = "150" r ="30"  class = "table" >
+                
+                </circle>
+                
+                <circle  cx="200" cy = "150" r ="30"  class = "table" >
+                    
+                </circle>
+                
+                <circle  cx="300" cy = "150" r ="30"  class = "table"  >
+                    
+                </circle>
+                
+                <circle  cx="400" cy = "150" r ="30"  class = "table" >
+                    
+                </circle>
+                <circle  cx="500" cy = "150" r ="30"  class = "table" fill = "green"    >
+                
+                </circle>
+                
+                <circle  cx="600" cy = "150" r ="30"  class = "table" fill = "green">
+                    
+                </circle>
+                
+                <circle  cx="700" cy = "150" r ="30"  class = "table"  >
+                    
+                </circle>
+                
+                <circle  cx="800" cy = "150" r ="30"  class = "table" >
+                    
+                </circle>
+                <text class="price" x="100" y="150" text-anchor="middle" fill = "white">$998</text>
+                <text class="price" x="200" y="150" text-anchor="middle" fill = "white">$998</text>
+                <text class="price" x="300" y="150" text-anchor="middle" fill = "white">$998</text>
+                <text class="price" x="400" y="150" text-anchor="middle" fill = "white">$998</text>
+                <text class="price" x="500" y="150" text-anchor="middle" fill = "white">$998</text>
+                <text class="price" x="600" y="150" text-anchor="middle" fill = "white">$998</text>
+                <text class="price" x="700" y="150" text-anchor="middle" fill = "white">$998</text>
+                <text class="price" x="800" y="150" text-anchor="middle" fill = "white">$998</text>
+            </g>
+            <g>
+                <circle  cx="100" cy = "250" r ="30"  class = "table" >
+                
+                </circle>
+                
+                <circle  cx="200" cy = "250" r ="30"  class = "table" >
+                    
+                </circle>
+                
+                <circle  cx="300" cy = "250" r ="30"  class = "table"  >
+                    
+                </circle>
+                
+                <circle  cx="400" cy = "250" r ="30"  class = "table" >
+                    
+                </circle>
+                <circle  cx="500" cy = "250" r ="30"  class = "table"  >
+                
+                </circle>
+                
+                <circle  cx="600" cy = "250" r ="30"  class = "table" >
+                    
+                </circle>
+                
+                <circle  cx="700" cy = "250" r ="30"  class = "table"  >
+                    
+                </circle>
+                
+                <circle  cx="800" cy = "250" r ="30"  class = "table" >
+                    
+                </circle>
+                <text class="price" x="100" y="250" text-anchor="middle" fill = "white">$998</text>
+                <text class="price" x="200" y="250" text-anchor="middle" fill = "white">$998</text>
+                <text class="price" x="300" y="250" text-anchor="middle" fill = "white">$998</text>
+                <text class="price" x="400" y="250" text-anchor="middle" fill = "white">$998</text>
+                <text class="price" x="500" y="250" text-anchor="middle" fill = "white">$998</text>
+                <text class="price" x="600" y="250" text-anchor="middle" fill = "white">$998</text>
+                <text class="price" x="700" y="250" text-anchor="middle" fill = "white">$998</text>
+                <text class="price" x="800" y="250" text-anchor="middle" fill = "white">$998</text>
+            </g>
+            <g>
+                <circle  cx="100" cy = "350" r ="30"  class = "table" >
+                
+                </circle>
+                
+                <circle  cx="200" cy = "350" r ="30"  class = "table" >
+                    
+                </circle>
+                
+                <circle  cx="300" cy = "350" r ="30"  class = "table"  >
+                    
+                </circle>
+                
+                <circle  cx="400" cy = "350" r ="30"  class = "table" >
+                    
+                </circle>
+                <circle  cx="500" cy = "350" r ="30"  class = "table" fill = "green" >
+                
+                </circle>
+                
+                <circle  cx="600" cy = "350" r ="30"  class = "table" fill = "green">
+                    
+                </circle>
+                
+                <circle  cx="700" cy = "350" r ="30"  class = "table"  >
+                    
+                </circle>
+                
+                <circle  cx="800" cy = "350" r ="30"  class = "table" >
+                    
+                </circle>
+                <text class="price" x="100" y="350" text-anchor="middle" fill = "white">$998</text>
+                <text class="price" x="200" y="350" text-anchor="middle" fill = "white">$998</text>
+                <text class="price" x="300" y="350" text-anchor="middle" fill = "white">$998</text>
+                <text class="price" x="400" y="350" text-anchor="middle" fill = "white">$998</text>
+                <text class="price" x="500" y="350" text-anchor="middle" fill = "white">$998</text>
+                <text class="price" x="600" y="350" text-anchor="middle" fill = "white">$998</text>
+                <text class="price" x="700" y="350" text-anchor="middle" fill = "white">$998</text>
+                <text class="price" x="800" y="350" text-anchor="middle" fill = "white">$998</text>
+            </g>
+            <g>
+                <circle  cx="100" cy = "450" r ="30"  class = "table" >
+                
+                </circle>
+                
+                <circle  cx="200" cy = "450" r ="30"  class = "table" >
+                    
+                </circle>
+                
+                <circle  cx="300" cy = "450" r ="30"  class = "table"  >
+                    
+                </circle>
+                
+                <circle  cx="400" cy = "450" r ="30"  class = "table" >
+                    
+                </circle>
+                <circle  cx="500" cy = "450" r ="30"  class = "table" fill = "green" >
+                
+                </circle>
+                
+                <circle  cx="600" cy = "450" r ="30"  class = "table" fill = "green">
+                    
+                </circle>
+                
+                <circle  cx="700" cy = "450" r ="30"  class = "table"  >
+                    
+                </circle>
+                
+                <circle  cx="800" cy = "450" r ="30"  class = "table" >
+                    
+                </circle>
+                <text class="price" x="100" y="450" text-anchor="middle" fill = "white">$998</text>
+                <text class="price" x="200" y="450" text-anchor="middle" fill = "white">$998</text>
+                <text class="price" x="300" y="450" text-anchor="middle" fill = "white">$998</text>
+                <text class="price" x="400" y="450" text-anchor="middle" fill = "white">$998</text>
+                <text class="price" x="500" y="450" text-anchor="middle" fill = "white">$998</text>
+                <text class="price" x="600" y="450" text-anchor="middle" fill = "white">$998</text>
+                <text class="price" x="700" y="450" text-anchor="middle" fill = "white">$998</text>
+                <text class="price" x="800" y="450" text-anchor="middle" fill = "white">$998</text>
+            </g>
+
+           
+
+        </svg>
+    </div>
+    <div class = "row mb-3">
+        <p class="fs-3">Price: $<span id="price">0</span></p>
+    </div>
+    
+
+    <footer class="bg-dark text-white text-center py-3 mt-5 fixed-bottom">
+        &copy; EIE4432 GP PROJECT:Flight Ticket Selling System
+        <br>
+        <p>21106181D             21103197D</p>
+    </footer>
+
+</body>
+
+</html>
