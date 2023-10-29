@@ -38,19 +38,28 @@
     </nav>
 
     <main class="container py-5">
-        <h2>Flight Payment Details</h2>
+        <h2>Payment Details For Your Flights</h2>
         <!-- Event details, seat selection and total price -->
         <div id="usersDetails">
-            
+            <table id="flightTable" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Departure Airport</th>
+                        <th>Destination Airport</th>
+                        <th>Departure Time(GMT: +8:00)</th>
+                        <th>Estimated Duration (hours)</th>
+                        <th>Seat</th>
+                        <th>Ticket Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Flight rows will be dynamically added here -->
+                </tbody>
+            </table>
         </div>
 
-        <div id="seatSelection">
+        <p class="fs-3">Total Price: $<span id="totalPrice"></span></p>
 
-        </div>
-
-        <p id="totalPrice">
-
-        </p>
 
         <h2>Payment Form</h2>
         <form id="paymentForm">

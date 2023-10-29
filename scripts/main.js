@@ -27,7 +27,7 @@ $(document).ready(function () {
             var flightRow = "<tr>" +
                 "<td>" + flight.departureAirport + "</td>" +
                 "<td>" + flight.destinationAirport + "</td>" +
-                "<td>" + flight.departureTime + "  GMT: +8:00</td>" +
+                "<td>" + flight.departureTime + "</td>" +
                 "<td>" + flight.duration + "  hours</td>" +
                 "<td> $" + flight.ticketPrice + "</td>" +
                 "</tr>";
