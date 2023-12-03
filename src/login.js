@@ -111,7 +111,6 @@ route.post('/logout', (req, res) => {
       status: 'success',
       message: 'successfully logout'
     });
-
     req.session.destroy();
     res.end();
   } else {
@@ -133,11 +132,7 @@ route.get('/me', (req, res) => {
       status: 'success',
       user: {
         username: user.username,
-        nickname: user.nickname,
-        email: user.email,
-        gender: user.gender,
-        role: user.role,
-        birthdate: user.birthdate
+        role: user.role
       }
     });
   } else {

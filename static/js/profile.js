@@ -57,9 +57,6 @@ async function updateProfile() {
 
     const response = await fetch('/auth/update_user', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
       body: JSON.stringify(updateData)
     });
 
@@ -70,6 +67,6 @@ async function updateProfile() {
     }
   } catch (error) {
     console.error('error:', error);
-    alert('failed to update profile');
+    alert('更新个人资料失败');
   }
 }
