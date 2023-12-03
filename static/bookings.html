@@ -1,0 +1,240 @@
+<!--static/bookings.html -->
+
+<!--Group members' infomation:-->
+<!--Student Name:
+Chen Chen Xu HanZhuo-->
+
+<!--Student ID:-->
+<!--21106181D 21103197D-->
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flight Ticket Selling System</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="js/jquery-3.7.1.min.js"></script>
+<style>
+  .seat-map {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #f0f0f0;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  .row {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5px;
+  }
+  .seat {
+    width: 30px;
+    height: 30px;
+    margin: 3px;
+    border: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  .first-class {
+    background-color: #800080; /* Purple color for first class */
+  }
+  .economy-class {
+    background-color: #ff0000; /* Red color for economy class */
+  }
+  .selected {
+    background-color: #808080; /* Grey color for selected seats */
+  }
+  .chosen {
+    background-color: #008000; /* Green color for chosen seats */
+  }
+  .legend {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+  }
+  .legend-item div {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+  }
+  #selected-seats {
+    margin-top: 20px;
+    text-align: center;
+  }
+  #selected-seats ul {
+    list-style: none; /* 移除列表符号 */
+    padding: 0; /* 移除内边距 */
+    display: flex; /* 用 flex 显示列表项 */
+    flex-wrap: wrap; /* 允许多行显示 */
+    justify-content: center; /* 居中对齐 */
+  }
+  #selected-seats ul li {
+    margin: 5px 10px; /* 列表项之间的空间 */
+  }
+</style>
+</head>
+<body>
+    <nav class="navbar justify-content-center navbar-expand-lg navbar-light bg-primary-subtle ">
+        <div class="container">
+            <!-- button for small screen -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- collapse navigation bar -->
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <div class="navbar-nav">
+                    <a class="nav-link navbar-brand active fw-bold link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+                        href="index.html">Home</a>
+                    <a class="nav-link" href="bookings.html">Ticket Bookings</a>
+                    <a class="nav-link" href="payment.html">Payment</a>
+                    <a class="nav-link" href="register.html">Sign Up/Sign In</a>
+                    <a class="nav-link" href="profile.html">profile</a>
+                </div>
+            </div>
+    </nav>
+
+<div class="seat-map">
+  <!-- Seats will be generated here by JavaScript -->
+</div>
+
+<!-- Seat Legend -->
+<div class="legend">
+  <!-- ... Legend items ... -->
+</div>
+<!-- Seat Legend -->
+<div class="legend">
+    <div class="legend-item">
+      <div class="seat selected"></div>
+      <span>Selected seats</span>
+    </div>
+    <div class="legend-item">
+      <div class="seat economy-class"></div>
+      <span>economic seats</span>
+    </div>
+    <div class="legend-item">
+      <div class="seat first-class"></div>
+      <span>business seats</span>
+    </div>
+</div>
+<div id="selected-seats">
+    <p>You have chosen：</p>
+    <ul id="seat-list">
+      <!-- 选择的座位将显示在这里 -->
+    </ul>
+</div>
+<div id="total-price">
+    <p>Total price：<span id="price">0</span> 元</p>
+</div>
+<button id="submit-btn">Submit</button>
+
+<script>
+  const seatMap = document.querySelector('.seat-map');
+  const SEAT_PRICES = {
+    'first-class': 2000,
+    'economy-class': 500
+  };
+  
+  function updateSelectedSeatsDisplay() {
+    const selectedSeatsList = document.getElementById('seat-list');
+    selectedSeatsList.innerHTML = ''; // 清空列表
+    let totalPrice = 0; // 总价
+
+    document.querySelectorAll('.chosen').forEach(seat => {
+      const seatClass = seat.dataset.originalClass;
+      const seatClassText = seatClass === 'first-class' ? 'business seats' : 'economic seats';
+      const seatPrice = SEAT_PRICES[seatClass];
+      
+      const seatInfo = document.createElement('li');
+      seatInfo.textContent = `${seat.textContent} - ${seatClassText} - ${seatPrice} 元`;
+      selectedSeatsList.appendChild(seatInfo);
+
+      // 累加价格
+      totalPrice += seatPrice;
+    });
+
+    // 显示总价格
+    document.getElementById('price').textContent = totalPrice;
+  }
+  // Function to toggle seat selection
+  function toggleSeatSelection(seat) {
+    // If the seat is already selected or is grey (not selectable), do nothing
+    if (seat.classList.contains('selected')) {
+      return;
+    }
+    // If the seat is currently chosen, revert to original class (first-class or economy-class)
+    if (seat.classList.contains('chosen')) {
+      seat.classList.remove('chosen');
+      seat.classList.add(seat.dataset.originalClass);
+    } else {
+      // Save the original class so we can revert back to it
+      seat.dataset.originalClass = seat.classList.contains('first-class') ? 'first-class' : 'economy-class';
+      seat.classList.remove('first-class', 'economy-class');
+      seat.classList.add('chosen');
+      
+    }
+    updateSelectedSeatsDisplay();
+  }
+  document.getElementById('submit-btn').addEventListener('click', function() {
+    // 显示确认提示框
+    if (confirm('Are you sure to submit?')) {
+      // 用户点击 "Yes"，在这里处理提交逻辑
+      alert('提交成功！');
+      // 实际上这里可以是一些实际的提交逻辑，例如表单提交或者发送数据到服务器
+    } else {
+      // 用户点击 "No"，不做任何操作
+    }
+  });
+
+  // Generate seats based on rows and seats per row
+  for (let i = 1; i <= 10; i++) {
+    let row = document.createElement('div');
+    row.classList.add('row');
+    for (let j = 1; j <= 12; j++) {
+      let seat = document.createElement('div');
+      seat.textContent = `${i}${String.fromCharCode(64 + j)}`;
+      seat.classList.add('seat');
+
+      // Determine seat class by position
+      if (['D', 'E', 'F', 'G', 'H', 'I'].includes(seat.textContent[1])) {
+        seat.classList.add('first-class');
+      } else {
+        seat.classList.add('economy-class');
+      }
+
+      // Pre-select the grey seats
+      if (['1A', '1B', '2B','2A','3A','3B','4A','4B','5A','5B','6A','6B','7A','7B','8A','8B','9B','9A','10A','10B','6D', '6E', '6F', '6G', '1F', '1H', '2F', '2G', '2H'].includes(seat.textContent)) {
+        seat.classList.add('selected');
+      }
+
+      // Add click event listener for seat selection
+      seat.addEventListener('click', function() { toggleSeatSelection(this); });
+      
+      row.appendChild(seat);
+    }
+    seatMap.appendChild(row);
+  }
+</script>
+<footer class="bg-dark text-white text-center py-3 mt-5 fixed-bottom">
+    &copy; EIE4432 GP PROJECT:Flight Ticket Selling System
+    <br>
+    <p>21106181D             21103197D</p>
+</footer>
+
+</body>
+</html>
