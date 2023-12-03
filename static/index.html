@@ -17,7 +17,7 @@ Chen Chen Xu HanZhuo-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
-    <script src="scripts/jquery-3.7.1.min.js"></script>
+    <script src="js/jquery-3.7.1.min.js"></script>
 
     <!-- Include external JavaScript file -->
     <script src="js/index.js"></script>
@@ -44,6 +44,9 @@ Chen Chen Xu HanZhuo-->
         .has-seats {
           color: #008000; /* 绿色表示有座 */
         }
+.flight-info { display: none; margin-top: 20px; border-collapse: collapse; }
+        .flight-info th, .flight-info td { border: 1px solid black; padding: 8px; }
+        .show-button { margin-top: 20px; }
         
 
       </style>
@@ -73,6 +76,16 @@ Chen Chen Xu HanZhuo-->
                 </div>
             </div>
     </nav>
+    <!--greeting-->
+    <h4 id="greeting" class="greeting"></h4>
+    <!--logout button-->
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <button type="button" class="btn btn-primary" id="logoutBtn">Log Out</button>
+            </div>
+        </div>
+
     <!-- Flight Ticket Dashboard -->
     <img src="assets/flight_ticket.png" class="rounded mx-auto d-block" style="width: 150px; height: 150px;" alt="Flight Ticket Poster">
 
@@ -89,11 +102,49 @@ Chen Chen Xu HanZhuo-->
       
         <input type="submit" value="search">
     </form>
+    
     <!-- 添加排序按钮 -->
     <button id="sort-button" style="margin-top: 10px;">sort in departure time</button>
     <!-- 添加按航班时长排序的按钮 -->
     <button id="sort-by-duration-button" style="margin-top: 10px;">sort in duration</button>
-
+<button class="show-button" onclick="showFlights()">Show previous Flights record</button>
+    <table id="flights" class="flight-info">
+      <tr>
+          <th>Date</th>
+          <th>Departure</th>
+          <th>Destination</th>
+          <th>Class</th>
+          <th>Price</th>
+      </tr>
+      <tr>
+          <td>2023-12-1</td>
+          <td>Zhengzhou</td>
+          <td>Shanghai</td>
+          <td>Economy Class</td>
+          <td>918 CNY</td>
+      </tr>
+      <tr>
+          <td>2023-1-1</td>
+          <td>Zhengzhou</td>
+          <td>Shanghai</td>
+          <td>First Class</td>
+          <td>9191 CNY</td>
+      </tr>
+      <tr>
+        <td>2018-4-16</td>
+        <td>Zhengzhou</td>
+        <td>Japan</td>
+        <td>First Class</td>
+        <td>19999 CNY</td>
+    </tr>
+    <tr>
+        <td>2018-4-16</td>
+        <td>New York</td>
+        <td>Japan Tokyo</td>
+        <td>First Class</td>
+        <td>9999 CNY</td>
+    </tr>
+  </table>
 
     <div id="flight-results"></div>
 
@@ -233,6 +284,10 @@ Chen Chen Xu HanZhuo-->
         });
         displaySearchResults(searchResults); // 重新显示排序后的结果
       });
+function showFlights() {
+            var flights = document.getElementById("flights");
+            flights.style.display = "table";
+        }
     
     </script>
 </body>

@@ -1,42 +1,75 @@
-$(document).ready(function() {
-    // Pre-fill the user ID field based on the logged-in user
-    $('#userId').val(loggedInUserId);
+document.addEventListener("DOMContentLoaded", async () => {
+  try {
+    // check login status
+    const loginResponse = await fetch("/auth/me");
+    // if not logged in, redirect to register.html
+    if (!loginResponse.ok) {
+      alert("Welcome to our website! But Please login first to get more infomation!");
+      window.open("/register.html", "_self");
+    } else {
+      // if logged in, display user info
+      await fetchUserProfile();
+    }
+  } catch (error) {
+    console.error('get user profile failed:', error);
+  }
 
-    // Handle profile form submission
-    $('#profileForm').submit(function(event) {
-        event.preventDefault(); // Prevent the form from submitting normally
+  // add event listener to profile form
+  const profileForm = document.getElementById('profileForm');
+  if (profileForm) {
+    profileForm.addEventListener('submit', async function (event) {
+      event.preventDefault();
+      await updateProfile();
+    });
+  }
+});
 
-        // Get the form data
-        var formData = $(this).serializeArray();
+async function fetchUserProfile() {
+  try {
+    const response = await fetch('/auth/me');
+    if (response.ok) {
+      const data = await response.json();
+      const greeting = document.querySelector(".greeting");
+      greeting.textContent = `Welcome, ${data.user.username} (${data.user.role})`;
 
-        // Convert the form data into an object
-        var profileData = {};
-        $.each(formData, function(index, field) {
-            profileData[field.name] = field.value;
-        });
+    } else {
+      throw new Error('cannot get user profile');
+    }
+  } catch (error) {
+    console.error('cannot get user profile:', error);
+  }
+}
 
-        // Update the profile JSON file with the new information
-        updateProfile(profileData);
+
+
+async function updateProfile() {
+  const formData = new FormData(document.getElementById('profileForm'));
+  try {
+
+    const updateData = {
+      username: formData.get('username'),
+      password: formData.get('password'),
+      nickname: formData.get('nickname'),
+      email: formData.get('email'),
+      gender: formData.get('gender'),
+      birthdate: formData.get('birthdate')
+    };
+
+    const response = await fetch('/auth/update_user', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(updateData)
     });
 
-    // Function to update the profile JSON file
-    function updateProfile(profileData) {
-        // Make an AJAX POST request to update the profile
-        $.ajax({
-            url: 'update_profile.php', // Replace with the appropriate server-side script URL
-            method: 'POST',
-            data: profileData,
-            success: function(response) {
-                // Handle the response
-                if (response.success) {
-                    alert('Profile updated successfully!');
-                } else {
-                    alert('Error updating profile. Please try again.');
-                }
-            },
-            error: function() {
-                alert('An error occurred while updating the profile. Please try again later.');
-            }
-        });
+    if (response.ok) {
+      alert("success update profile");
+    } else {
+      throw new Error('failed to update profile');
     }
-});
+  } catch (error) {
+    console.error('error:', error);
+    alert('failed to update profile');
+  }
+}

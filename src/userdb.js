@@ -4,7 +4,7 @@ import fs from 'fs/promises';
 import client from './dbclient.js';
 
 
-const users = client.db('lab5db').collection('users');
+const users = client.db('EIE4432GPChenChen').collection('users');
 
 // Initialize the database with some users
 async function init_db() {

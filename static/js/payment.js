@@ -1,24 +1,27 @@
-$(document).ready(function () {
+//static/js/payment.js
+(document).ready(function () {
     var totalPrice = 0;
+    var flights;
 
+    // get user ticket
     $.get("assets/user_ticket.json", function (data) {
         flights = data;
-        displayFlights(flights); // Display the flights in the table
-        calculateTotalPrice(); // Calculate and update the total price
+        displayFlights(flights); // display flights
+        calculateTotalPrice(flights); // calculate total price
     });
 
-    // Function to display flights in the table
+   
     function displayFlights(flights) {
-        // Clear previous flight rows
+        // clear table body
         $("#flightTable tbody").empty();
 
-        // Loop through the flights array and display each flight
+        // display flights
         $.each(flights, function (index, flight) {
             var flightRow = "<tr>" +
                 "<td>" + flight.departureAirport + "</td>" +
                 "<td>" + flight.destinationAirport + "</td>" +
                 "<td>" + flight.departureTime + "</td>" +
-                "<td>" + flight.duration + " hours</td>" +
+                "<td>" + flight.duration + " 小时</td>" +
                 "<td>" + flight.seat + "</td>" +
                 "<td>$" + flight.ticketPrice + "</td>" +
                 "</tr>";
@@ -26,54 +29,43 @@ $(document).ready(function () {
         });
     }
 
-    function calculateTotalPrice() {
-        totalPrice = 0;
+    // calculate total price
+    function calculateTotalPrice(flights) {
+        totalPrice = flights.reduce((acc, flight) => acc + flight.ticketPrice, 0);
 
-        // Loop through the flights array and add up the ticket prices
-        $.each(flights, function (index, flight) {
-            totalPrice += flight.ticketPrice;
-        });
-
-        // Update the total price element with the calculated value
+        // update total price
         $("#totalPrice").text(totalPrice);
     }
 
-    // Call the calculateTotalPrice function initially to display the default total price
-    calculateTotalPrice();
-
-
-
-
-
-
-    // Handle form submission for payment
+    // deal with payment
     $("#paymentForm").submit(function (event) {
-        event.preventDefault(); // Prevent the form from submitting normally
+        event.preventDefault(); // 阻止表单默认提交
 
-        // Get the input values
+        
         var cardNumber = $("#cardNumber").val();
         var expiryDate = $("#expiryDate").val();
         var cvv = $("#cvv").val();
 
-        // Perform validation on input values 
+        
 
-        // Simulate payment process
+        // simulate payment
         var paymentStatus = Math.random() < 0.5 ? "success" : "failed";
 
-        // Display payment status
+        // display payment status
         if (paymentStatus === "success") {
-            $("#paymentStatus").html("<p class='text-success'>Payment successful!</p>");
+            $("#paymentStatus").html("<p class='text-success'>支付成功！</p>");
 
-            // Show electronic tickets to buyers after successful purchase
-            var ticketsHtml = "<h2>Electronic Tickets</h2>";
-            // Generate and append the ticket details dynamically to the 'tickets' div element
-
+            // display tickets
+            var ticketsHtml = "<h2>eTicket</h2>";
+            $.each(flights, function (index, flight) {
+                ticketsHtml += "<p>" + flight.departureAirport + " -> " + flight.destinationAirport + "</p>";
+            });
             $("#tickets").html(ticketsHtml);
 
-            // Update the order status upon successful payment
-            // Can make an AJAX request here to update the order status in backend database
+  
+    
         } else {
-            $("#paymentStatus").html("<p class='text-danger'>Payment failed. Please try again.</p>");
+            $("#paymentStatus").html("< class='text-danger'>failed</p>");
         }
     });
 });

@@ -1,11 +1,31 @@
 [
   {
     "username": "chen chen",
-    "password": "1234",
+    "password": "adminpass",
     "nickname": "chen",
     "email": "chen944420634@gmail.com",
     "gender": "Male",
     "birthday": "1994-04-20",
+    "role": "admin",
+    "enabled": true
+  },
+  {
+    "username": "Xu HanZhuo",
+    "password": "adminpass",
+    "nickname": "xu",
+    "email": "Xu HanZhuo@polyu.com",
+    "gender": "Male",
+    "birthday": "1994-04-20",
+    "role": "admin",
+    "enabled": true
+  },
+  {
+    "username": "admin",
+    "password": "$2b$10$qM2wXuPq4oePf/4.DhJJrOnAYwc8zqKtl/MQ88jG1CvC6REIFlRQC",
+    "nickname": "EIE4432ADMIN",
+    "email": "chen944420634@gmail.com",
+    "gender": "male",
+    "birthdate": "2023-12-03",
     "role": "admin",
     "enabled": true
   }

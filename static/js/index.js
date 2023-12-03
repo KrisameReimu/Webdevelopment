@@ -38,6 +38,42 @@ $(document).ready(function () {
     }
 });
 
+document.addEventListener("DOMContentLoaded", async () => {
+  try {
+    const response = await fetch("/auth/me");
+    const data = await response.json();
+
+    if (!response.ok) {
+      alert("Welcome to our website! But Please login first to get more infomation!");
+      window.open("/register.html", "_self");
+    } else {
+      const greeting = document.querySelector(".greeting");
+      greeting.textContent = `Welcome, ${data.user.username} (${data.user.role})`;
+    }
+    const logoutBtn = document.getElementById("logoutBtn");
+    logoutBtn.addEventListener("click", async () => {
+      const confirmed = confirm("Confirm to logout?");
+      if (confirmed) {
+        try {
+          const response = await fetch("/auth//logout", { method: 'POST' });
+          if (!response.ok) {
+            alert("An unexpected error occurred");
+            return;
+          }
+          console.log("Logged out successfully");
+          alert("Logged out successfully");
+          window.open("/register.html", "_self");
+        } catch (error) {
+          console.error(error);
+          alert("An unexpected error occurred");
+        }
+      }
+    });
+  } catch (error) {
+    console.error(error);
+    alert("An unexpected error occurred");
+  }
+});
 
 
 

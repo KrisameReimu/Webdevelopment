@@ -3,7 +3,7 @@ import express from 'express';
 import multer from 'multer';
 import { promises as fs } from 'fs';
 import bodyParser from 'body-parser'; 
-
+import bcrypt from 'bcrypt';
 
 const route = express.Router();
 route.use(bodyParser.urlencoded({ extended: true })); 
@@ -42,7 +42,13 @@ async function validate_user(username, password) {
   }
 
   const user = users.get(username);
-  if (user.password !== password) {
+ 
+  const match = await bcrypt.compare(password, user.password);
+  console.log("password: "+password);
+  console.log("match: "+match); // true or false
+  console.log("user.password: "+user.password);
+  console.log(match);
+  if (!match) {
     return false; // Password mismatch
   }
 
@@ -63,11 +69,11 @@ route.post('/login',  async (req, res) => {
     }
     
     req.session.logged = false; // Reset login status to false
-    console.log(req.body)
-    const { username, password } = req.body;
     
+    const { username, password } = req.body;
+    console.log(req.body)
     const user = await validate_user(username, password); // Check username and password using validate_user()
-
+    console.log("user input: "+user);
     if (!user || !user.enabled) {
       return res.status(401).json({
         status: 'failed',
@@ -99,6 +105,13 @@ route.post('/login',  async (req, res) => {
 // Define an asynchronous request handler for POST /logout
 route.post('/logout', (req, res) => {
   if (req.session.logged) {
+    console.log(`User '${req.session.username}' logged out`);
+    //show message to user that logout successfully
+    res.status(200).json({
+      status: 'success',
+      message: 'successfully logout'
+    });
+
     req.session.destroy();
     res.end();
   } else {
@@ -111,13 +124,20 @@ route.post('/logout', (req, res) => {
 
 // Define an asynchronous request handler for GET /me
 route.get('/me', (req, res) => {
+  console.log("me: req.body: "+req.body);
+  console.log("me: "+req.session.logged);
+  console.log("req:"+req.session.username);
   if (req.session.logged) {
     const user = users.get(req.session.username);
     res.json({
       status: 'success',
       user: {
         username: user.username,
-        role: user.role
+        nickname: user.nickname,
+        email: user.email,
+        gender: user.gender,
+        role: user.role,
+        birthdate: user.birthdate
       }
     });
   } else {
@@ -129,9 +149,9 @@ route.get('/me', (req, res) => {
 });
 
 // Define an asynchronous function named update_user()
-async function update_user(username, password, role) {
+async function update_user(username, password, nickname, email, gender, birthdate) {
   // Insert/Update the user object into users using the username as key
-  users.set(username, { username, password, role, enabled: true });
+  users.set(username, { username, password, nickname, email, gender, birthdate, role : "user",enabled: true });
 
   // Save changes into "users.json"
   try {
@@ -158,10 +178,14 @@ route.post('/register',  async (req, res) => {
     await init_userdb(); // Call init_userdb() if the users Map is empty
   }
   
-  const { username, password, role } = req.body;
+  const { username, password, nickname, email, gender, birthdate } = req.body;
   console.log(req.body);
-  console.log({ username, password, role });
-
+  //console.log({ username, password, nickname, email, gender, birthdate });
+  //hash password
+ 
+  const saltRounds = 10;
+  const hash = bcrypt.hashSync(password, saltRounds);
+  console.log(hash);
   
   // Check if both "username" and "password" are not empty
   if (!username || !password) {
@@ -172,12 +196,13 @@ route.post('/register',  async (req, res) => {
   }
 
   // Check registration data against criteria
-  if (username.length < 3) {
+  if (username.length < 4) {
     return res.status(400).json({
       status: 'failed',
       message: 'Username must be at least 3 characters'
     });
   }
+
   // Check if the username already exists in the user database
   if (users.has(username)) {
     return res.status(400).json({
@@ -186,13 +211,30 @@ route.post('/register',  async (req, res) => {
     });
   }
   // Check if the password is at least 8 characters
-  if (password.length < 8) {
+  if (password.length < 6) {
     return res.status(400).json({
       status: 'failed',
-      message: 'Password must be at least 8 characters'
+      message: 'Password must be at least 6 characters'
     });
   }
+  // Check birthdate is valid
+  if (birthdate === '') {
+    return res.status(400).json({
+      status: 'failed',
+      message: 'Birthdate cannot be empty'
+    });
+  }
+ 
+  // Check if the email is valid
+  if (email === '') {
+    return res.status(400).json({
+      status: 'failed',
+      message: 'Email cannot be empty'
+    });
+  }
+
   
+  /*
   // Check if the role is either "student" or "user"
   if (role !== 'student' && role !== 'user') {
     return res.status(400).json({
@@ -200,17 +242,20 @@ route.post('/register',  async (req, res) => {
       message: 'Role can only be either `student` or `user`'
     });
   }
-  
-  // If all criteria are met, insert a new user to the user database using update_user()
-  const updateResult = await update_user(username, password, role);
+  */
+  //add role user to the user
+  const role = "user";
+  // If all criteria are met, insert a new user to the user database using update_user(), using the hashed password
+  const updateResult = await update_user(username, hash, nickname, email, gender, birthdate, role);
   console.log(users);
   console.log(updateResult);
   // Return a JSON response based on the result of update_user()
-  if (updateResult) {
+  if (updateResult === true) {
     return res.json({
       status: 'success',
       user: {
         username,
+        nickname,
         role
       }
     });
