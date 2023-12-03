@@ -142,7 +142,7 @@ window.onload = function() {
   }
 };
     
-// set a timer to logout after 10 minutes of inactivity
+// set a timer to logout after 5 minutes of inactivity
 let idleTimeout;
 function resetIdleTimer() {
   clearTimeout(idleTimeout);
